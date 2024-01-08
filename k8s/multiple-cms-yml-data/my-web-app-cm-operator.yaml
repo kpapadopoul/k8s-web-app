@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-web-app-cm-operator
+  labels:
+    name: my-web-app
+data:
+  application-operator.yml: |-
+    app:
+      operator-config-applied: true

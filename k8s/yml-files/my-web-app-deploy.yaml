@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web-app-deploy
+  labels:
+    app: my-web-app
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: my-web-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: my-web-app
+    spec:
+      volumes:
+        - name: my-web-app-config
+          configMap:
+            name: my-web-app-config
+            optional: true
+      containers:
+        - name: my-web-app
+          image: my-web-app:0-SNAPSHOT
+          imagePullPolicy: Never
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: default,operator
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - mountPath: "/config"
+              name: my-web-app-config

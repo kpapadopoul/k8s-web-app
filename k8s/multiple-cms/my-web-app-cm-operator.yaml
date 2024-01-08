@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-web-app-cm-operator
+  labels:
+    name: my-web-app
+data:
+  APP_OPERATOR_CONFIG_APPLIED: "true"

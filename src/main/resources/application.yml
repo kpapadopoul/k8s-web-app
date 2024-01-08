@@ -1,0 +1,4 @@
+app:
+  config-applied: true
+  default-config-applied: false
+  operator-config-applied: false
